@@ -7,11 +7,10 @@ import (
 	"log"
 	"time"
 	"vector-mongodb-sink/adapters"
-	"vector-mongodb-sink/internal/common"
 )
 
 func StoreJson(b []byte, collection string) {
-	var data []common.LogRecord
+	var data []map[string]interface{}
 	var dataToInsert []interface{}
 	err := json.Unmarshal(b, &data)
 

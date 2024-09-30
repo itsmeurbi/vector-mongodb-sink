@@ -6,15 +6,13 @@ import (
 	"strings"
 	"time"
 	"vector-mongodb-sink/adapters"
-	"vector-mongodb-sink/internal/common"
 )
 
 func StorePlainText(b []byte, collection string) {
-	now := time.Now()
 	var dataToInsert []interface{}
 
 	for _, m := range strings.Split(string(b), "\n") {
-		dataToInsert = append(dataToInsert, common.LogRecord{Timestamp: now, Message: m})
+		dataToInsert = append(dataToInsert, map[string]interface{}{ "body": m })
 	}
 
 	coll := adapters.GetCollection(adapters.DB, collection)
